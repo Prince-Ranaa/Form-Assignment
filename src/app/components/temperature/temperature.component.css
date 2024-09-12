@@ -1,0 +1,69 @@
+form {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 500px;
+    margin: 10px auto;
+    padding: 10px;
+
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+table {
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.bold {
+    font-size: 32px;
+    font-weight: bolder;
+    margin: 0 0 20px 0;
+}
+
+small {
+    color: red;
+    margin-bottom: 30px;
+}
+
+.formDiv {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 300px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+hr {
+    margin-bottom: 20px;
+}
+
+#addBtn {
+    background-color: rgb(11, 112, 194);
+    width: 120px;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#addBtn:disabled {
+    background-color: #6c757d;
+    color: #ffffff;
+    opacity: 0.6;
+    cursor: not-allowed;
+}

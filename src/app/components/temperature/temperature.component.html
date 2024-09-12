@@ -1,0 +1,70 @@
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Add Data">
+        <div class="formContainer">
+            <form [formGroup]="temperatureForm" (ngSubmit)="addData()">
+                <p class="bold">Temperature Form</p>
+                <hr>
+                <div class="formDiv">
+                    <b for="datetime">Datetime:</b>
+                    <input id="datetime" type="datetime-local" formControlName="datetime" class="form-control" />
+                    <div
+                        *ngIf="temperatureForm.get('datetime')?.hasError('invalidDate') && temperatureForm.get('datetime')?.touched">
+                        <small>*Please enter a past date and time.</small>
+                    </div>
+                </div>
+
+                <div class="formDiv">
+                    <b for="temperature">Temperature:</b>
+                    <input id="temperature" type="number" formControlName="temperature" class="form-control" />
+                    <div
+                        *ngIf="(temperatureForm.get('temperature')?.hasError('min') || temperatureForm.get('temperature')?.hasError('max')) ">
+                        <small>*Temperature must be between -50°C and 50°C.</small>
+                    </div>
+
+                </div>
+
+                <button id="addBtn" type="submit" [disabled]="!this.temperatureForm.valid">Add Data</button>
+            </form>
+        </div>
+        <p class="bold">Temperature Data</p>
+
+
+        <div *ngIf="data.length == 0; else showTable">
+            No Data Available to display. Please add data to view it.
+        </div>
+
+        <ng-template #showTable>
+            <div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Date</td>
+                                <td>Time</td>
+                                <td>Temperature</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of data">
+                                <td>{{ item.datetime | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ item.datetime | date:'HH:mm' }}</td>
+                                <td>{{item.temperature}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label=" View Data">
+        <div *ngIf="data.length == 0;else showChart">
+            <p class="bold">No data available. Please add data to see chart.</p>
+        </div>
+
+        <ng-template #showChart>
+            <p class="bold">Tempreature Chart</p>
+            <canvas #chartCanvas></canvas>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
